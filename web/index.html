@@ -2,12 +2,222 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Monitoreo Boya Tilapia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boya IoT · Monitoreo de Estanque de Tilapias</title>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Monitoreo Boya Tilapia</h1>
-<iframe src="http://localhost:1880/ui" title="Dashboard"></iframe>
+    <div class="app-shell">
+        <!-- Top App Header -->
+        <header class="app-header" role="banner">
+            <div class="header-container">
+                <div class="brand-group">
+                    <div class="brand-icon" aria-hidden="true">
+                        <i data-lucide="waves"></i>
+                    </div>
+                    <div>
+                        <div class="brand-title-row">
+                            <h1 class="brand-title">Boya IoT · Estanque de Tilapias</h1>
+                            <span class="device-tag">ID: BOYA-TILAPIA-01</span>
+                        </div>
+                        <p class="brand-subtitle">Supervisión acuícola en tiempo real de calidad de agua y ambiente</p>
+                    </div>
+                </div>
+
+                <div class="header-status-group">
+                    <div id="connection-pill" class="status-pill status-online" aria-live="polite">
+                        <span class="status-dot"></span>
+                        <span id="connection-text" class="status-label">En línea</span>
+                    </div>
+                    <div class="sync-info" aria-live="polite">
+                        <i data-lucide="clock" class="icon-inline" aria-hidden="true"></i>
+                        <span id="last-sync-text">Sincronizado hace 0s</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Viewport -->
+        <main class="dashboard-main" role="main">
+            <div class="main-container">
+                <!-- Section 1: Telemetry Metric Cards -->
+                <section class="metrics-section" aria-label="Métricas de Telemetría">
+                    <div class="metrics-grid">
+                        <!-- Card 1: Water Temperature -->
+                        <article class="card metric-card" id="card-temp">
+                            <div class="card-header">
+                                <div class="metric-meta">
+                                    <span class="metric-label">Temperatura del Agua</span>
+                                    <span class="metric-target">Rango ideal: 26.0 - 30.0 °C</span>
+                                </div>
+                                <div class="metric-icon-box icon-temp" aria-hidden="true">
+                                    <i data-lucide="thermometer"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value-row">
+                                    <span id="val-temp" class="metric-number tabular-nums">28.4</span>
+                                    <span class="metric-unit">°C</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span id="badge-temp" class="badge badge-success">
+                                    <i data-lucide="check-circle-2" class="badge-icon"></i>
+                                    <span class="badge-text">Óptimo</span>
+                                </span>
+                                <span class="metric-hint">Acuicultura normal</span>
+                            </div>
+                        </article>
+
+                        <!-- Card 2: Water pH -->
+                        <article class="card metric-card" id="card-ph">
+                            <div class="card-header">
+                                <div class="metric-meta">
+                                    <span class="metric-label">Nivel de pH del Agua</span>
+                                    <span class="metric-target">Rango ideal: 6.5 - 8.5</span>
+                                </div>
+                                <div class="metric-icon-box icon-ph" aria-hidden="true">
+                                    <i data-lucide="droplet"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value-row">
+                                    <span id="val-ph" class="metric-number tabular-nums">7.4</span>
+                                    <span class="metric-unit">pH</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span id="badge-ph" class="badge badge-success">
+                                    <i data-lucide="check-circle-2" class="badge-icon"></i>
+                                    <span class="badge-text">Óptimo</span>
+                                </span>
+                                <span class="metric-hint">Equilibrio químico</span>
+                            </div>
+                        </article>
+
+                        <!-- Card 3: Ambient Humidity -->
+                        <article class="card metric-card" id="card-humidity">
+                            <div class="card-header">
+                                <div class="metric-meta">
+                                    <span class="metric-label">Humedad Ambiental</span>
+                                    <span class="metric-target">Rango normal: 50 - 80 %</span>
+                                </div>
+                                <div class="metric-icon-box icon-hum" aria-hidden="true">
+                                    <i data-lucide="cloud-rain"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value-row">
+                                    <span id="val-humidity" class="metric-number tabular-nums">68</span>
+                                    <span class="metric-unit">%</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span id="badge-humidity" class="badge badge-secondary">
+                                    <i data-lucide="info" class="badge-icon"></i>
+                                    <span class="badge-text">Normal</span>
+                                </span>
+                                <span class="metric-hint">Entorno de superficie</span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Section 2: Tabbed Panoramic Chart Container (Node-RED Integration) -->
+                <section class="charts-section" aria-label="Visualización Gráfica y Tendencias">
+                    <div class="card chart-panel-card">
+                        <div class="chart-panel-header">
+                            <div class="chart-header-info">
+                                <h2 class="chart-panel-title">Análisis Histórico y Tendencias</h2>
+                                <p class="chart-panel-desc">Visualizaciones continuas preparadas para incrustación desde Node-RED</p>
+                            </div>
+
+                            <div class="chart-controls-group">
+                                <!-- Tab Switcher -->
+                                <div class="tab-switcher" role="tablist" aria-label="Selección de variable gráfica">
+                                    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="water" id="tab-water">
+                                        <i data-lucide="activity" class="btn-icon" aria-hidden="true"></i>
+                                        Calidad de Agua
+                                    </button>
+                                    <button class="tab-btn" role="tab" aria-selected="false" data-tab="ambient" id="tab-ambient">
+                                        <i data-lucide="wind" class="btn-icon" aria-hidden="true"></i>
+                                        Ambiente
+                                    </button>
+                                </div>
+
+                                <!-- Timeframe Selector -->
+                                <div class="timeframe-group" role="group" aria-label="Rango de tiempo">
+                                    <button class="timeframe-btn active" data-range="1h">1H</button>
+                                    <button class="timeframe-btn" data-range="6h">6H</button>
+                                    <button class="timeframe-btn" data-range="24h">24H</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart Slot Content -->
+                        <div class="chart-body">
+                            <!-- View 1: Water Quality Slot -->
+                            <div class="chart-view-slot active" id="slot-water" role="tabpanel" aria-labelledby="tab-water">
+                                <div class="chart-placeholder" id="placeholder-water">
+                                    <div class="placeholder-icon-ring">
+                                        <i data-lucide="line-chart"></i>
+                                    </div>
+                                    <h3 class="placeholder-title">Esperando gráficos de Calidad de Agua desde Node-RED</h3>
+                                    <p class="placeholder-subtitle">
+                                        La integración mostrará la evolución combinada de Temperatura (°C) y pH del estanque.
+                                    </p>
+                                    <div class="placeholder-badge-row">
+                                        <span class="badge badge-outline">
+                                            <i data-lucide="radio" class="badge-icon"></i>
+                                            Tópico: boya/tilapia/telemetria/graficos
+                                        </span>
+                                        <span class="badge badge-secondary">Marco iFrame preparado</span>
+                                    </div>
+                                </div>
+                                <iframe class="chart-iframe hidden" id="iframe-water" title="Gráfico de Calidad de Agua Node-RED"></iframe>
+                            </div>
+
+                            <!-- View 2: Ambient Slot -->
+                            <div class="chart-view-slot" id="slot-ambient" role="tabpanel" aria-labelledby="tab-ambient">
+                                <div class="chart-placeholder" id="placeholder-ambient">
+                                    <div class="placeholder-icon-ring">
+                                        <i data-lucide="bar-chart-2"></i>
+                                    </div>
+                                    <h3 class="placeholder-title">Esperando gráficos Ambientales desde Node-RED</h3>
+                                    <p class="placeholder-subtitle">
+                                        La integración mostrará los perfiles de Humedad Relativa y Temperatura Externa.
+                                    </p>
+                                    <div class="placeholder-badge-row">
+                                        <span class="badge badge-outline">
+                                            <i data-lucide="radio" class="badge-icon"></i>
+                                            Tópico: boya/tilapia/ambiente/graficos
+                                        </span>
+                                        <span class="badge badge-secondary">Marco iFrame preparado</span>
+                                    </div>
+                                </div>
+                                <iframe class="chart-iframe hidden" id="iframe-ambient" title="Gráfico Ambiental Node-RED"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer / Demo Indicator Bar -->
+        <footer class="app-footer" role="contentinfo">
+            <div class="footer-container">
+                <span class="footer-copy">© Monitoreo Boya IoT Tilapia · Arquitectura Desacoplada (SDD)</span>
+                <div class="demo-badge-wrap">
+                    <span class="pulse-beacon" aria-hidden="true"></span>
+                    <span class="demo-label">Simulador Dinámico Local Activo (Oscilación cada 5s)</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
 </body>
 </html>
