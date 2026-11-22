@@ -6,7 +6,12 @@
 
 ## Summary
 
-Implementar la arquitectura visual y maquetación completa del dashboard web para el monitoreo de estanques de tilapias. La interfaz adopta la estética de ingeniería limpia "Workbench" (inspirada en la estructura modular de `SWGEPA-staging`), basada en una paleta luminosa sobre fondo blanco puro (`#FFFFFF` / `oklch`), tarjetas métricas con números tabulares para telemetría (Temperatura, pH, Humedad), insignias semánticas de estado acuícola y contenedores modulares con proporción reservada para la futura incrustación de gráficos de Node-RED. La solución se desarrolla en HTML5 semántico, CSS3 con tokens y variables personalizadas, y JavaScript vanilla ligero sin dependencias pesadas ni frameworks de servidor.
+Implementar la arquitectura visual y maquetación completa del dashboard web para el monitoreo de estanques de tilapias. La interfaz adopta la estética de ingeniería limpia "Workbench" (inspirada en la estructura modular de `SWGEPA-staging`), basada en una paleta luminosa sobre fondo blanco puro (`#FFFFFF` / `oklch`), tres tarjetas métricas principales correspondientes a los 3 sensores del sistema:
+1. **pH del Agua**: Sonda PHE-45P (SKU: Q004-SNS-PC-000) con módulo acondicionador.
+2. **Temperatura del Agua**: Sonda sumergible DS18B20 (Digital, 1-Wire).
+3. **Humedad Interna de la Boya**: Sensor ubicado junto al microcontrolador ESP32 para verificar estanqueidad y condensación interna.
+
+Incluye insignias semánticas de estado operativo/acuícola y contenedores modulares con proporción reservada para la futura incrustación de gráficos de Node-RED (pestañas "Calidad de Agua" y "Ambiente Interno Boya"). La solución se desarrolla en HTML5 semántico, CSS3 con tokens y variables personalizadas, y JavaScript vanilla ligero sin dependencias pesadas ni frameworks de servidor.
 
 ## Technical Context
 

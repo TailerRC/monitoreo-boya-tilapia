@@ -13,15 +13,15 @@ interface TelemetryUpdatePayload {
   connected: boolean;            // true si la boya reporta señal
   metrics: {
     water_temperature: {
-      value: number | null;      // Grados Celsius (ej. 28.5)
+      value: number | null;      // Grados Celsius (ej. 28.5) - Sensor DS18B20
       status: "optimal" | "caution" | "critical" | "unknown";
     };
     ph_level: {
-      value: number | null;      // Nivel de pH (ej. 7.3)
+      value: number | null;      // Nivel de pH (ej. 7.3) - Sensor PHE-45P (Q004-SNS-PC-000)
       status: "optimal" | "caution" | "critical" | "unknown";
     };
-    ambient_humidity: {
-      value: number | null;      // Porcentaje (ej. 72)
+    internal_humidity: {
+      value: number | null;      // Porcentaje (ej. 55) - Sensor interior boya (Gabinete ESP32)
       status: "optimal" | "caution" | "critical" | "unknown";
     };
   };

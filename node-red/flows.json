@@ -1,0 +1,391 @@
+[
+    {
+        "id": "bc5bfb3a5a5d1d6b",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cc61c30de9ec5a26",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.100.128",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "65d18790e2c28661",
+        "type": "websocket-listener",
+        "path": "/ws/boya",
+        "wholemsg": "false"
+    },
+    {
+        "id": "43c35650b76ef20f",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "Gill Sans,Geneva,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "Gill Sans,Geneva,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Tilapia",
+            "hideToolbar": "true",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "e3128586c24ea730",
+        "type": "ui_tab",
+        "name": "Grafico 1",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f30de3e45f49cc6f",
+        "type": "ui_tab",
+        "name": "Grafico 2",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e05fc05b96cd3dd8",
+        "type": "ui_tab",
+        "name": "Grafico 3",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "0aac0fceaa532359",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "a64c2f70176482b8",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "25ef1ac25c4e6cfe",
+        "type": "ui_group",
+        "name": "Tilapias",
+        "tab": "a64c2f70176482b8",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "811d1d55c7d614a7",
+        "type": "ui_group",
+        "name": "Grafico",
+        "tab": "e3128586c24ea730",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "920391bfe46f3483",
+        "type": "ui_group",
+        "name": "Grafico",
+        "tab": "f30de3e45f49cc6f",
+        "order": 1,
+        "disp": true,
+        "width": 18,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "16075990437e55df",
+        "type": "ui_group",
+        "name": "Grafico",
+        "tab": "e05fc05b96cd3dd8",
+        "order": 1,
+        "disp": true,
+        "width": 14,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b383d0584fb6c92d",
+        "type": "mqtt in",
+        "z": "bc5bfb3a5a5d1d6b",
+        "name": "",
+        "topic": "tilapias/estanque1/datos",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "cc61c30de9ec5a26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "4e741ae46ed6110b",
+                "534e6cc0358382bd"
+            ]
+        ]
+    },
+    {
+        "id": "4e741ae46ed6110b",
+        "type": "function",
+        "z": "bc5bfb3a5a5d1d6b",
+        "name": "dashboard",
+        "func": "return [\n    { payload: msg.payload.temperatura },\n    { payload: msg.payload.ph },\n    { payload: msg.payload.humedad_interna }\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "eb600e195664c212"
+            ],
+            [
+                "0435738c3efb5162"
+            ],
+            [
+                "415fc109a601386c"
+            ]
+        ]
+    },
+    {
+        "id": "534df50a0f24657c",
+        "type": "websocket out",
+        "z": "bc5bfb3a5a5d1d6b",
+        "name": "",
+        "server": "65d18790e2c28661",
+        "client": "",
+        "x": 780,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "534e6cc0358382bd",
+        "type": "function",
+        "z": "bc5bfb3a5a5d1d6b",
+        "name": "function 1",
+        "func": "msg.payload = {\n    temp: msg.payload.temperatura,\n    ph: msg.payload.ph,\n    hum: msg.payload.humedad_interna,\n    hora: new Date().toLocaleTimeString()\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "534df50a0f24657c"
+            ]
+        ]
+    },
+    {
+        "id": "415fc109a601386c",
+        "type": "ui_gauge",
+        "z": "bc5bfb3a5a5d1d6b",
+        "name": "",
+        "group": "16075990437e55df",
+        "order": 1,
+        "width": 14,
+        "height": 8,
+        "gtype": "wave",
+        "title": "",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 770,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "eb600e195664c212",
+        "type": "ui_gauge",
+        "z": "bc5bfb3a5a5d1d6b",
+        "name": "",
+        "group": "811d1d55c7d614a7",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "35",
+        "colors": [
+            "#059fff",
+            "#00e626",
+            "#ca3838"
+        ],
+        "seg1": "26",
+        "seg2": "30",
+        "diff": false,
+        "className": "",
+        "x": 770,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0435738c3efb5162",
+        "type": "ui_template",
+        "z": "bc5bfb3a5a5d1d6b",
+        "group": "920391bfe46f3483",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div style=\"width:100%; padding:6px 0;\">\n    <div style=\"text-align:center; font-weight:bold;\">pH del agua</div>\n    <div style=\"text-align:center; font-size:28px; font-weight:bold;\">\n        {{msg.payload | number:2}}\n    </div>\n\n    <div style=\"position:relative; margin:14px 8px 4px 8px;\">\n        <div style=\"height:34px; border-radius:6px;\n      background:linear-gradient(to right,\n        #e8312f 0%, #f47a20 14%, #f9a11b 21%, #fbc918 28%,\n        #d4d227 36%, #7dc242 43%, #2fb34a 50%, #17a7a0 57%,\n        #1792d0 64%, #2f6fc2 71%, #3f55b5 79%, #5a45a8 86%, #7d3a96 100%);\"></div>\n\n        <div ng-show=\"msg.payload !== undefined\"\n            ng-style=\"{left: ((msg.payload > 14 ? 14 : (msg.payload < 0 ? 0 : msg.payload)) * 100 / 14) + '%'}\" style=\"position:absolute; top:-8px; width:4px; height:50px;\n                margin-left:-2px; background:#000; border-radius:2px;\"></div>\n    </div>\n\n    <div style=\"display:flex; justify-content:space-between; margin:0 8px; font-size:11px;\">\n        <span>0</span><span>2</span><span>4</span><span>6</span>\n        <span>7</span><span>8</span><span>10</span><span>12</span><span>14</span>\n    </div>\n    <div style=\"display:flex; justify-content:space-between; margin:2px 8px; font-size:11px;\">\n        <span>Ácido</span><span>Neutro</span><span>Alcalino</span>\n    </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 780,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "52789c0bee6c5c3f",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]

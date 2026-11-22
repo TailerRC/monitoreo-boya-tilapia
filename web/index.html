@@ -19,21 +19,16 @@
                     </div>
                     <div>
                         <div class="brand-title-row">
-                            <h1 class="brand-title">Boya IoT · Estanque de Tilapias</h1>
-                            <span class="device-tag">ID: BOYA-TILAPIA-01</span>
+                            <h1 class="brand-title">Estanque de Tilapias - Boya IoT</h1>
                         </div>
                         <p class="brand-subtitle">Supervisión acuícola en tiempo real de calidad de agua y ambiente</p>
                     </div>
                 </div>
 
                 <div class="header-status-group">
-                    <div id="connection-pill" class="status-pill status-online" aria-live="polite">
-                        <span class="status-dot"></span>
-                        <span id="connection-text" class="status-label">En línea</span>
-                    </div>
                     <div class="sync-info" aria-live="polite">
                         <i data-lucide="clock" class="icon-inline" aria-hidden="true"></i>
-                        <span id="last-sync-text">Sincronizado hace 0s</span>
+                        <span id="last-sync-text">Monitoreo en tiempo real</span>
                     </div>
                 </div>
             </div>
@@ -97,29 +92,29 @@
                             </div>
                         </article>
 
-                        <!-- Card 3: Ambient Humidity -->
+                        <!-- Card 3: Internal Buoy Humidity (ESP32 Enclosure) -->
                         <article class="card metric-card" id="card-humidity">
                             <div class="card-header">
                                 <div class="metric-meta">
-                                    <span class="metric-label">Humedad Ambiental</span>
-                                    <span class="metric-target">Rango normal: 50 - 80 %</span>
+                                    <span class="metric-label">Humedad Interna (Boya)</span>
+                                    <span class="metric-target">Gabinete ESP32: &lt; 70 % HR</span>
                                 </div>
                                 <div class="metric-icon-box icon-hum" aria-hidden="true">
-                                    <i data-lucide="cloud-rain"></i>
+                                    <i data-lucide="shield-alert"></i>
                                 </div>
                             </div>
                             <div class="card-content">
                                 <div class="metric-value-row">
-                                    <span id="val-humidity" class="metric-number tabular-nums">68</span>
+                                    <span id="val-humidity" class="metric-number tabular-nums">54</span>
                                     <span class="metric-unit">%</span>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <span id="badge-humidity" class="badge badge-secondary">
-                                    <i data-lucide="info" class="badge-icon"></i>
-                                    <span class="badge-text">Normal</span>
+                                <span id="badge-humidity" class="badge badge-success">
+                                    <i data-lucide="check-circle-2" class="badge-icon"></i>
+                                    <span class="badge-text">Estanco</span>
                                 </span>
-                                <span class="metric-hint">Entorno de superficie</span>
+                                <span class="metric-hint">Sin condensación</span>
                             </div>
                         </article>
                     </div>
@@ -130,74 +125,43 @@
                     <div class="card chart-panel-card">
                         <div class="chart-panel-header">
                             <div class="chart-header-info">
-                                <h2 class="chart-panel-title">Análisis Histórico y Tendencias</h2>
-                                <p class="chart-panel-desc">Visualizaciones continuas preparadas para incrustación desde Node-RED</p>
+                                <h2 class="chart-panel-title">Visualización de datos</h2>
                             </div>
 
                             <div class="chart-controls-group">
-                                <!-- Tab Switcher -->
+                                <!-- Tab Switcher: 3 Secciones Independientes -->
                                 <div class="tab-switcher" role="tablist" aria-label="Selección de variable gráfica">
-                                    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="water" id="tab-water">
-                                        <i data-lucide="activity" class="btn-icon" aria-hidden="true"></i>
-                                        Calidad de Agua
+                                    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="temp" id="tab-temp">
+                                        <i data-lucide="thermometer" class="btn-icon" aria-hidden="true"></i>
+                                        Temperatura
                                     </button>
-                                    <button class="tab-btn" role="tab" aria-selected="false" data-tab="ambient" id="tab-ambient">
-                                        <i data-lucide="wind" class="btn-icon" aria-hidden="true"></i>
-                                        Ambiente
+                                    <button class="tab-btn" role="tab" aria-selected="false" data-tab="ph" id="tab-ph">
+                                        <i data-lucide="droplet" class="btn-icon" aria-hidden="true"></i>
+                                        pH del Agua
                                     </button>
-                                </div>
-
-                                <!-- Timeframe Selector -->
-                                <div class="timeframe-group" role="group" aria-label="Rango de tiempo">
-                                    <button class="timeframe-btn active" data-range="1h">1H</button>
-                                    <button class="timeframe-btn" data-range="6h">6H</button>
-                                    <button class="timeframe-btn" data-range="24h">24H</button>
+                                    <button class="tab-btn" role="tab" aria-selected="false" data-tab="hum" id="tab-hum">
+                                        <i data-lucide="shield-alert" class="btn-icon" aria-hidden="true"></i>
+                                        Humedad Interna
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Chart Slot Content -->
+                        <!-- Chart Slot Content: Cada gráfico en su propia sección por separado -->
                         <div class="chart-body">
-                            <!-- View 1: Water Quality Slot -->
-                            <div class="chart-view-slot active" id="slot-water" role="tabpanel" aria-labelledby="tab-water">
-                                <div class="chart-placeholder" id="placeholder-water">
-                                    <div class="placeholder-icon-ring">
-                                        <i data-lucide="line-chart"></i>
-                                    </div>
-                                    <h3 class="placeholder-title">Esperando gráficos de Calidad de Agua desde Node-RED</h3>
-                                    <p class="placeholder-subtitle">
-                                        La integración mostrará la evolución combinada de Temperatura (°C) y pH del estanque.
-                                    </p>
-                                    <div class="placeholder-badge-row">
-                                        <span class="badge badge-outline">
-                                            <i data-lucide="radio" class="badge-icon"></i>
-                                            Tópico: boya/tilapia/telemetria/graficos
-                                        </span>
-                                        <span class="badge badge-secondary">Marco iFrame preparado</span>
-                                    </div>
-                                </div>
-                                <iframe class="chart-iframe hidden" id="iframe-water" title="Gráfico de Calidad de Agua Node-RED"></iframe>
+                            <!-- Sección 1: Temperatura del Agua -->
+                            <div class="chart-view-slot active" id="slot-temp" role="tabpanel" aria-labelledby="tab-temp">
+                                <iframe class="chart-iframe" id="iframe-temp" src="http://localhost:1880/ui/#!/0" title="Node-RED Temperatura"></iframe>
                             </div>
 
-                            <!-- View 2: Ambient Slot -->
-                            <div class="chart-view-slot" id="slot-ambient" role="tabpanel" aria-labelledby="tab-ambient">
-                                <div class="chart-placeholder" id="placeholder-ambient">
-                                    <div class="placeholder-icon-ring">
-                                        <i data-lucide="bar-chart-2"></i>
-                                    </div>
-                                    <h3 class="placeholder-title">Esperando gráficos Ambientales desde Node-RED</h3>
-                                    <p class="placeholder-subtitle">
-                                        La integración mostrará los perfiles de Humedad Relativa y Temperatura Externa.
-                                    </p>
-                                    <div class="placeholder-badge-row">
-                                        <span class="badge badge-outline">
-                                            <i data-lucide="radio" class="badge-icon"></i>
-                                            Tópico: boya/tilapia/ambiente/graficos
-                                        </span>
-                                        <span class="badge badge-secondary">Marco iFrame preparado</span>
-                                    </div>
-                                </div>
-                                <iframe class="chart-iframe hidden" id="iframe-ambient" title="Gráfico Ambiental Node-RED"></iframe>
+                            <!-- Sección 2: Nivel de pH del Agua -->
+                            <div class="chart-view-slot" id="slot-ph" role="tabpanel" aria-labelledby="tab-ph">
+                                <iframe class="chart-iframe" id="iframe-ph" src="http://localhost:1880/ui/#!/1" title="Node-RED pH del Agua"></iframe>
+                            </div>
+
+                            <!-- Sección 3: Humedad Interna de la Boya -->
+                            <div class="chart-view-slot" id="slot-hum" role="tabpanel" aria-labelledby="tab-hum">
+                                <iframe class="chart-iframe" id="iframe-hum" src="http://localhost:1880/ui/#!/2" title="Node-RED Humedad Interna"></iframe>
                             </div>
                         </div>
                     </div>
@@ -205,14 +169,16 @@
             </div>
         </main>
 
-        <!-- Footer / Demo Indicator Bar -->
+        <!-- Footer -->
         <footer class="app-footer" role="contentinfo">
             <div class="footer-container">
-                <span class="footer-copy">© Monitoreo Boya IoT Tilapia · Arquitectura Desacoplada (SDD)</span>
-                <div class="demo-badge-wrap">
-                    <span class="pulse-beacon" aria-hidden="true"></span>
-                    <span class="demo-label">Simulador Dinámico Local Activo (Oscilación cada 5s)</span>
-                </div>
+                <span class="footer-copy">© Monitoreo de Tilapias mediante Boya IoT</span>
+                <a class="footer-github-link" href="https://github.com/TailerRC/monitoreo-boya-tilapia" target="_blank" rel="noopener noreferrer" aria-label="Repositorio de GitHub">
+                    <svg class="footer-github-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
             </div>
         </footer>
     </div>

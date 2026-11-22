@@ -15,15 +15,15 @@ Representa el estado de salud y conectividad de la boya en el encabezado princip
 | `pondName` | String | ej. `"Estanque Principal - Alevines"` | Nombre del tanque o ubicación física. |
 
 ### 2. `TelemetryCardMetric`
-Representa la información y apariencia visual de cada tarjeta de métrica acuícola.
+Representa la información y apariencia visual de cada tarjeta de métrica acuícola y de integridad física de la boya.
 
 | Campo | Tipo | Formato / Rango | Descripción |
 | :--- | :--- | :--- | :--- |
-| `parameterKey` | String | `"water_temp" \| "ph" \| "ambient_hum"` | Identificador clave del sensor. |
-| `title` | String | ej. `"Temperatura del Agua"` | Título de la tarjeta. |
-| `value` | Number / String | ej. `28.4`, `7.2`, `65` o `"--"` | Valor medido actual formateado. |
+| `parameterKey` | String | `"water_temp" \| "ph" \| "internal_hum"` | Identificador clave del sensor: DS18B20 (`water_temp`), PHE-45P (`ph`), o interno ESP32 (`internal_hum`). |
+| `title` | String | ej. `"Temperatura del Agua"`, `"pH del Agua"`, `"Humedad Interna (Boya)"` | Título descriptivo de la tarjeta. |
+| `value` | Number / String | ej. `28.4`, `7.2`, `55` o `"--"` | Valor medido actual formateado. |
 | `unit` | String | `"°C" \| "pH" \| "%"` | Unidad de medida visible. |
-| `optimalRange` | String | ej. `"26.0 - 30.0 °C"` | Texto de referencia biológica. |
+| `optimalRange` | String | ej. `"26.0 - 30.0 °C"`, `"6.5 - 8.5"`, `"< 70 %"` | Texto de referencia operativa (calidad de agua / estanqueidad ESP32). |
 | `healthStatus` | String | `"optimal" \| "caution" \| "critical"` | Estado evaluado contra los umbrales. |
 | `badgeLabel` | String | `"Óptimo" \| "Alerta" \| "Crítico"` | Etiqueta en la insignia de la tarjeta. |
 
@@ -32,7 +32,7 @@ Representa los contenedores modulares destinados a albergar los gráficos de Nod
 
 | Campo | Tipo | Valores Permitidos | Descripción |
 | :--- | :--- | :--- | :--- |
-| `slotId` | String | `"chart-water-quality" \| "chart-ambient"` | Identificador del bloque contenedor. |
+| `slotId` | String | `"chart-water-quality" \| "chart-ambient"` | Identificador del bloque contenedor ("Calidad de Agua" vs "Ambiente Interno"). |
 | `title` | String | ej. `"Tendencia de Calidad de Agua"` | Título en el encabezado de la tarjeta. |
 | `selectedTimeframe`| String | `"1h" \| "6h" \| "24h"` | Período de visualización seleccionado. |
 | `state` | String | `"placeholder" \| "loading" \| "active" \| "error"` | Estado visual del contenedor. |

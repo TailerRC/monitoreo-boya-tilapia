@@ -46,10 +46,13 @@
   - `clock`: Última sincronización.
 - **Razón**: Iconografía técnica nítida de trazo fino (1.5px - 2px) que refuerza la estética de instrumentación.
 
-## Decision 5: Rangos de Alerta Específicos para Tilapias
+## Decision 5: Selección de Sensores de Hardware y Rangos Operativos
 
-- **Decisión**: Establecer en el diseño los rangos ideales para el cultivo de tilapia (*Oreochromis niloticus*):
-  - **Temperatura de Agua**: Óptimo `26.0 - 30.0 °C` (Alerta: `< 24.0 °C` o `> 32.0 °C`).
-  - **pH del Agua**: Óptimo `6.5 - 8.5` (Alerta: `< 6.0` o `> 9.0`).
-  - **Humedad Relativa**: Referencia ambiental `50 - 80%`.
-- **Razón**: Permite que las tarjetas no sean solo números abstractos, sino herramientas operativas que muestran claramente si el agua está en condiciones biológicas óptimas para los peces.
+- **Decisión**: El sistema analiza exclusivamente 3 variables mediante hardware específico:
+  1. **pH del Agua**: Sensor de pH con sonda **PHE-45P** (Código/SKU: **Q004-SNS-PC-000**) mediante módulo acondicionador de señal.
+     - *Rango óptimo para tilapia*: `6.5 - 8.5` (Precaución: `6.0 - 6.4` o `8.6 - 9.0`; Crítico: `< 6.0` o `> 9.0`).
+  2. **Temperatura del Agua**: Sonda sumergible **DS18B20** en encapsulado de acero inoxidable (protocolo digital 1-Wire).
+     - *Rango óptimo para tilapia*: `26.0 - 30.0 °C` (Precaución: `24.0 - 25.9 °C` o `30.1 - 32.0 °C`; Crítico: `< 24.0 °C` o `> 32.0 °C`).
+  3. **Humedad Interna de la Boya (Carcasa ESP32)**: Sensor de humedad no sumergible montado en el interior de la boya al lado del ESP32 para verificar estanqueidad y prevenir condensación perjudicial.
+     - *Rango operativo seguro para electrónica*: `< 70.0% HR` (Precaución por condensación: `70.0% - 85.0% HR`; Crítico/Riesgo de filtración: `> 85.0% HR`).
+- **Razón**: Asegura claridad total entre variables biológicas del estanque (agua) y la salud física/estanqueidad del equipo electrónico flotante (ESP32). Evita falsas lecturas de humedad ambiental abierta concentrándose en la seguridad del microcontrolador dentro de la boya.

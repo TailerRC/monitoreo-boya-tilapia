@@ -10,6 +10,12 @@
 
 ## Clarifications
 
+### Session 2026-11-21
+- Q: ¿Cuáles son las variables exactas a monitorear y qué sensores de hardware se utilizarán? → A: El sistema analizará exclusivamente 3 variables con sus sensores correspondientes:
+  1. **pH del Agua**: Sensor de pH con sonda industrial/laboratorio PHE-45P (SKU: Q004-SNS-PC-000) conectado mediante módulo acondicionador de señal.
+  2. **Temperatura del Agua**: Sensor sumergible de acero inoxidable DS18B20 con protocolo digital 1-Wire.
+  3. **Humedad Interna de la Boya**: Sensor de humedad relativo montado en el interior del recinto hermético de la boya, ubicado al lado del ESP32. Su función es verificar la estanqueidad de la boya y vigilar la condensación interna para proteger los componentes electrónicos.
+
 ### Session 2026-11-20
 - Q: ¿Cómo deben distribuirse espacialmente los contenedores de gráficos en la vista de escritorio para los reportes de Node-RED? → A: Option C: Un solo contenedor panorámico principal con pestañas intercambiables (Tabs) para alternar entre "Calidad de Agua" y "Ambiente".
 - Q: ¿Cómo debe la interfaz manejar la simulación de estados de telemetría durante esta fase de diseño previa a la conexión del hardware físico? → A: Option C: Simulador automático mediante un temporizador en JavaScript que genera pequeñas oscilaciones realistas de telemetría cada 5 segundos de forma automática.
@@ -19,33 +25,33 @@
 
 ### User Story 1 - Visualización del Panel Principal y Métricas Clave (Priority: P1)
 
-Como operario o piscicultor del estanque de tilapias, quiero acceder al dashboard web y observar de forma inmediata las métricas críticas del agua (Temperatura, pH y Humedad) junto con el estado de conexión de la boya, para evaluar la salud del estanque en pocos segundos.
+Como operario o piscicultor del estanque de tilapias, quiero acceder al dashboard web y observar de forma inmediata las 3 métricas críticas del sistema: Calidad de agua (Temperatura DS18B20 y pH PHE-45P) e Integridad de la boya (Humedad interna junto al ESP32) junto con el estado de conexión, para evaluar la salud del estanque y la seguridad del equipo electrónico en pocos segundos.
 
-**Why this priority**: Es la función primordial del sistema de monitoreo. Proporciona valor inmediato como interfaz visual de supervisión, permitiendo saber si las variables acuícolas están en condiciones normales.
+**Why this priority**: Es la función primordial del sistema de monitoreo. Proporciona valor inmediato como interfaz visual de supervisión, permitiendo saber si las variables acuícolas están en condiciones normales y si la boya mantiene su estanqueidad interna.
 
 **Independent Test**: Puede probarse de forma autónoma abriendo la interfaz en cualquier navegador: el usuario debe visualizar la cabecera del estanque, el indicador de conectividad y tres tarjetas de métricas formateadas con sus unidades correspondientes (°C, pH, %) y códigos visuales de estado (óptimo/advertencia).
 
 **Acceptance Scenarios**:
 
-1. **Given** que el usuario carga el dashboard web, **When** la página inicializa, **Then** se muestran tres tarjetas métricas destacadas para Temperatura del Agua, pH y Humedad con valores numéricos formateados, etiquetas y estado de salud visible.
-2. **Given** un valor de telemetría fuera del rango recomendado de tilapias (ej. pH < 6.5 o > 8.5), **When** se evalúa el estado visual de la tarjeta, **Then** la tarjeta cambia su acento de color a advertencia/alerta para señalar la condición anómala.
+1. **Given** que el usuario carga el dashboard web, **When** la página inicializa, **Then** se muestran tres tarjetas métricas destacadas para Temperatura del Agua (DS18B20), pH (PHE-45P) y Humedad Interna de la Boya (ESP32) con valores numéricos formateados, etiquetas y estado de salud visible.
+2. **Given** un valor de telemetría fuera del rango recomendado de tilapias (ej. pH < 6.5 o > 8.5) o una humedad interna de la boya elevada (> 70% HR advirtiendo riesgo de condensación en el ESP32), **When** se evalúa el estado visual de la tarjeta, **Then** la tarjeta cambia su acento de color a advertencia/alerta para señalar la condición anómala.
 3. **Given** la barra superior del dashboard, **When** el operario la visualiza, **Then** observa el nombre del estanque/boya, una insignia (*badge*) del estado de conexión (En línea / Sin señal) y la estampa de tiempo de la última actualización.
-4. **Given** la interfaz en ejecución sin hardware conectado, **When** transcurren 5 segundos en el temporizador automático, **Then** las lecturas numéricas y la hora de última sincronización se actualizan reflejando pequeñas oscilaciones naturales del estanque.
+4. **Given** la interfaz en ejecución sin hardware conectado, **When** transcurren 5 segundos en el temporizador automático, **Then** las lecturas numéricas y la hora de última sincronización se actualizan reflejando pequeñas oscilaciones naturales del estanque y del interior de la boya.
 
 ---
 
 ### User Story 2 - Contenedores Modulares y Placeholders para Gráficos de Node-RED (Priority: P2)
 
-Como desarrollador e integrador de la solución, quiero que el layout disponga de un panel gráfico principal con pestañas intercambiables (*tabs*), controles de rango temporal y un espacio reservado para gráficos con marco `<iframe>` desacoplado, para integrar posteriormente los gráficos dinámicos de Node-RED sin desestructurar la interfaz.
+Como desarrollador e integrador de la solución, quiero que el layout disponga de un panel gráfico principal con pestañas intercambiables (*tabs*), controles de rango temporal y un espacio reservado para gráficos con marco `<iframe>` desacoplado, para alternar entre "Calidad de Agua" (Temperatura y pH) y "Ambiente Interno Boya" (Humedad en ESP32).
 
 **Why this priority**: Prepara la arquitectura visual para la siguiente fase de integración de gráficos de Node-RED, maximizando la legibilidad panorámica de las series de tiempo mediante pestañas y garantizando compatibilidad plug-and-play con las vistas web de Node-RED.
 
-**Independent Test**: Puede probarse verificando que el contenedor de gráficos mantenga su proporción fija o responsiva, permita alternar entre las pestañas "Calidad de Agua" y "Ambiente", muestre botones de rango temporal y exhiba un estado visual claro (placeholder informativo con marco iframe listo) indicando la preparación para recibir el gráfico.
+**Independent Test**: Puede probarse verificando que el contenedor de gráficos mantenga su proporción fija o responsiva, permita alternar entre las pestañas "Calidad de Agua" y "Ambiente Interno Boya", muestre botones de rango temporal y exhiba un estado visual claro (placeholder informativo con marco iframe listo) indicando la preparación para recibir el gráfico.
 
 **Acceptance Scenarios**:
 
-1. **Given** la sección de gráficos del dashboard, **When** no se han inyectado aún los gráficos de Node-RED, **Then** el contenedor muestra un marco estilizado con selector de pestañas (Calidad de Agua / Ambiente), selector de período (1h, 6h, 24h) y un estado de marcador de posición (*placeholder*) indicando "Esperando conexión con gráficos de telemetría".
-2. **Given** la interacción con las pestañas de gráficos, **When** el operario hace clic en "Ambiente", **Then** la vista activa conmuta instantáneamente al espacio reservado para humedad ambiental conservando las dimensiones del contenedor.
+1. **Given** la sección de gráficos del dashboard, **When** no se han inyectado aún los gráficos de Node-RED, **Then** el contenedor muestra un marco estilizado con selector de pestañas (Calidad de Agua / Ambiente Interno Boya), selector de período (1h, 6h, 24h) y un estado de marcador de posición (*placeholder*) indicando "Esperando conexión con gráficos de telemetría".
+2. **Given** la interacción con las pestañas de gráficos, **When** el operario hace clic en "Ambiente Interno Boya", **Then** la vista activa conmuta instantáneamente al espacio reservado para humedad de la carcasa conservando las dimensiones del contenedor.
 3. **Given** la futura incrustación de un componente gráfico de Node-RED vía iframe, **When** se enlaza la URL en el panel activo, **Then** el marco ocupa el 100% del ancho del contenedor sin desbordamiento horizontal ni saltos de contenido.
 
 ---
@@ -77,23 +83,23 @@ Como técnico acuícola en campo, quiero consultar el dashboard tanto desde un s
 
 - **FR-001**: La interfaz DEBE presentar una barra de encabezado principal que identifique claramente el sistema ("Boya IoT - Monitoreo de Estanque de Tilapias"), el identificador de la boya activa y la hora de última lectura.
 - **FR-002**: La interfaz DEBE incluir una insignia visual de estado de conectividad que indique claramente los estados: "En línea", "Desconectado" y "Advertencia".
-- **FR-003**: El dashboard DEBE proveer tarjetas de métricas dedicadas para:
-  1. Temperatura del Agua (expresada en °C).
-  2. pH del Agua (expresado en escala de 0 a 14 con precisión decimal).
-  3. Humedad Ambiental (expresada en %).
-- **FR-004**: Cada tarjeta de métrica DEBE exhibir un indicador visual de salud basado en rangos biológicos para tilapias (Óptimo, Precaución, Crítico) y el rango de referencia ideal visible para el operador.
-- **FR-005**: El layout DEBE destinar un contenedor gráfico panorámico modular principal equipado con pestañas (*tabs*) intercambiables para alternar fluidamente entre la vista de "Calidad de Agua (Temperatura vs. pH)" y "Registro Ambiental (Humedad)", maximizando el espacio de visualización sin sobrecargar la pantalla.
+- **FR-003**: El dashboard DEBE proveer exactamente tres tarjetas de métricas dedicadas para los sensores del sistema:
+  1. **Temperatura del Agua**: Sonda sumergible DS18B20 (expresada en °C).
+  2. **pH del Agua**: Sonda PHE-45P (SKU: Q004-SNS-PC-000) con módulo acondicionador (expresado en escala de 0 a 14 con precisión decimal).
+  3. **Humedad Interna de la Boya**: Sensor ubicado en el compartimento interior junto al microcontrolador ESP32 (expresado en %) para supervisar la estanqueidad y alertar sobre riesgo de condensación que dañe el hardware.
+- **FR-004**: Cada tarjeta de métrica DEBE exhibir un indicador visual de salud basado en rangos operativos (Óptimo, Precaución, Crítico) y el rango de referencia ideal visible para el operador (ej. Temp agua: 26-30 °C, pH agua: 6.5-8.5, Humedad interna: < 70%).
+- **FR-005**: El layout DEBE destinar un contenedor gráfico panorámico modular principal equipado con pestañas (*tabs*) intercambiables para alternar fluidamente entre la vista de "Calidad de Agua (Temperatura DS18B20 vs. pH PHE-45P)" y "Ambiente Interno Boya (Humedad ESP32)", maximizando el espacio de visualización sin sobrecargar la pantalla.
 - **FR-006**: El contenedor de gráficos DEBE incorporar una barra de herramientas superior con selector de intervalo de tiempo simulado (1 Hora, 6 Horas, 24 Horas) y botón de refresco.
 - **FR-007**: El contenedor de gráficos DEBE incluir un marco `<iframe>` responsivo (con ancho 100%, altura mínima de 340px y sin bordes invasivos) preparado para recibir la URL de Node-RED, mostrando un placeholder visual informativo y estilizado mientras la URL no esté configurada o esté en proceso de carga.
 - **FR-008**: La estructura visual DEBE ser totalmente adaptativa (*responsive*), utilizando una cuadrícula flexible que reorganice los elementos entre vistas de escritorio, tabletas y teléfonos móviles sin necesidad de desplazamiento horizontal.
-- **FR-009**: La paleta de colores DEBE basarse en un tema sobre fondo blanco puro (#FFFFFF / Clean White Workbench) con tarjetas de superficie blanca, bordes sutiles de delimitación (#E2E8F0), sombras difusas suaves (`shadow-sm`), acentos acuícolas en azul cielo (#0284C7) y códigos semánticos de semáforo (verde/amarillo/rojo) para la salud biológica de las tilapias.
+- **FR-009**: La paleta de colores DEBE basarse en un tema sobre fondo blanco puro (#FFFFFF / Clean White Workbench) con tarjetas de superficie blanca, bordes sutiles de delimitación (#E2E8F0), sombras difusas suaves (`shadow-sm`), acentos acuícolas en azul cielo (#0284C7) y códigos semánticos de semáforo (verde/amarillo/rojo) para la salud biológica de las tilapias e integridad del ESP32.
 - **FR-010**: La interfaz DEBE implementar en su controlador JavaScript un temporizador de simulación local (intervalo de 5 segundos) que genere fluctuaciones leves y verosímiles en las lecturas de telemetría y actualice la marca de tiempo de sincronización de forma continua, demostrando el dinamismo de las tarjetas y badges sin requerir hardware físico en esta fase.
 
 ### Key Entities *(include if feature involves data)*
 
-- **Lectura de Telemetría**: Representa el paquete de datos del estanque; contiene temperatura de agua, nivel de pH, porcentaje de humedad, estampa temporal y estado de validez de sensor.
-- **Rango Parámetro Tilapia**: Entidad de configuración visual que define los umbrales seguros (ej. Temperatura: 26-30 °C; pH: 6.5-8.5) y asocia estilos de color (verde = óptimo, amarillo = alerta, rojo = peligro).
-- **Contenedor de Gráfico con Pestañas e Iframe**: Bloque visual modular con selector de pestaña activa ("Calidad de Agua" vs "Ambiente"), controles de rango temporal, dimensiones fijadas/elásticas y marco `<iframe>` listo para incrustación de Node-RED.
+- **Lectura de Telemetría**: Representa el paquete de datos del sistema; contiene temperatura del agua (DS18B20), nivel de pH (PHE-45P), porcentaje de humedad interna de la boya (ESP32), estampa temporal y estado de conexión.
+- **Rango Parámetro Tilapia y Boya**: Entidad de configuración visual que define los umbrales seguros (ej. Temperatura: 26-30 °C; pH: 6.5-8.5; Humedad interna ESP32: < 70%) y asocia estilos de color (verde = óptimo, amarillo = alerta, rojo = peligro).
+- **Contenedor de Gráfico con Pestañas e Iframe**: Bloque visual modular con selector de pestaña activa ("Calidad de Agua" vs "Ambiente Interno Boya"), controles de rango temporal, dimensiones fijadas/elásticas y marco `<iframe>` listo para incrustación de Node-RED.
 
 ## Success Criteria *(mandatory)*
 

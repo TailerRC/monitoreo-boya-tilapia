@@ -44,7 +44,7 @@
 ### Implementation for User Story 1
 
 - [X] T007 [US1] Build header markup with system title "Boya IoT · Estanque de Tilapias", device badge slot, and last sync timestamp in `web/index.html`
-- [X] T008 [US1] Build telemetry metric cards markup for Water Temperature, pH Level, and Ambient Humidity with icon containers and value slots in `web/index.html`
+- [X] T008 [US1] Build telemetry metric cards markup for Water Temperature (DS18B20), pH Level (PHE-45P), and Internal Buoy Humidity (ESP32 Enclosure) with icon containers and value slots in `web/index.html`
 - [X] T009 [US1] Style header bar, connection status pills (online/offline/warning), and telemetry metric cards with tabular numbers (`tabular-nums`) and subtle shadows in `web/style.css`
 - [X] T010 [US1] Implement DOM binding function `renderTelemetry(data)` to update card numbers, badges, and sync timestamp in `web/app.js`
 - [X] T011 [US1] Implement 5-second automatic simulation timer oscillating telemetry values realistically within safe tilapia ranges in `web/app.js`
@@ -61,7 +61,7 @@
 
 ### Implementation for User Story 2
 
-- [X] T012 [US2] Build tabbed chart container markup with tab bar buttons ('Calidad de Agua' vs 'Ambiente') and timeframe selector buttons ('1H', '6H', '24H') in `web/index.html`
+- [X] T012 [US2] Build tabbed chart container markup with tab bar buttons ('Calidad de Agua (DS18B20 / PHE-45P)' vs 'Interior Boya (ESP32)') and timeframe selector buttons ('1H', '6H', '24H') in `web/index.html`
 - [X] T013 [US2] Build chart content area with styled placeholder message, icon, topic badge, and decoupled responsive `<iframe>` element in `web/index.html`
 - [X] T014 [US2] Style tabbed chart panel, active tab pill indicators, timeframe toggle buttons, and responsive iframe wrapper (`min-height: 340px`) in `web/style.css`
 - [X] T015 [US2] Implement tab switching click handlers to toggle active chart view and update visual tab state in `web/app.js`
